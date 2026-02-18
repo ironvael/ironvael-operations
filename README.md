@@ -1,36 +1,241 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ironvael Operations
+
+*Forged in Permanence.*
+
+A Next.js website for Ironvael Operations—an operating firm that builds durable business infrastructure.
+
+---
+
+## Critique of the Previous Site (Generic Consulting Template)
+
+If the prior site was a typical consulting template, it likely suffered from:
+
+- **Generic value props** — Phrases like "solutions," "partnership," "results-driven" that could apply to any firm
+- **Startup aesthetic** — Bright gradients, rounded corners, playful CTAs, tech-blue accents
+- **Copy that sounds like marketing** — Buzzwords (unlock, leverage, optimize) instead of substance
+- **Testimonial bloat** — Social proof that feels manufactured rather than earned
+- **Shallow structure** — Services as interchangeable cards with no depth or hierarchy
+- **No philosophy** — No clear point of view; tone indistinguishable from competitors
+
+The refactor addresses this by grounding everything in the forge metaphor: durable, industrial, technical. Copy reads like specification, not pitch.
+
+---
+
+## Component Structure
+
+```
+src/
+├── app/
+│   ├── api/lead/route.ts      # Form handler (POST /api/lead)
+│   ├── capabilities/page.tsx
+│   ├── engagement/page.tsx
+│   ├── about/page.tsx
+│   ├── contact/page.tsx
+│   ├── layout.tsx
+│   ├── page.tsx               # Home
+│   ├── robots.ts
+│   └── sitemap.ts
+├── components/
+│   ├── home/
+│   │   ├── Hero.tsx
+│   │   ├── Problem.tsx
+│   │   ├── ForgeModel.tsx
+│   │   ├── CapabilitiesSummary.tsx
+│   │   ├── Outcomes.tsx
+│   │   └── FinalCta.tsx
+│   ├── ui/                    # shadcn: button, input, textarea
+│   ├── ContactForm.tsx
+│   ├── Footer.tsx
+│   ├── Header.tsx
+│   └── Section.tsx            # Layout wrapper
+└── lib/
+    ├── copy.ts                # All site copy (single source of truth)
+    └── utils.ts
+```
+
+---
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS v4
+- **Components:** shadcn/ui
+- **Icons:** lucide-react
+- **Motion:** Framer Motion
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Where Copy Lives
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+All marketing and page content is centralized in:
 
-## Learn More
+```
+src/lib/copy.ts
+```
 
-To learn more about Next.js, take a look at the following resources:
+Edit this file to change:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Site metadata:** `site`, `nav`
+- **Home page:** `hero`, `problem`, `forgeModel`, `capabilities`, `outcomes`, `finalCta`
+- **Capabilities page:** `capabilitiesPage`
+- **Engagement page:** `engagementPage`
+- **About page:** `aboutPage`
+- **Contact page:** `contactPage`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+No copy is hardcoded in components. Update `copy.ts` and the site reflects it.
 
-## Deploy on Vercel
+## How to Edit Capabilities
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Capabilities are defined in `src/lib/copy.ts` in two places:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **`capabilities`** — Used on the home page summary (title + short description)
+2. **`capabilitiesPage.sections`** — Used on the full Capabilities page (spec-style with covers, for, outcomes, examples)
+
+Each section in `capabilitiesPage.sections` has:
+
+- `title` — Capability name
+- `covers` — What this domain covers
+- `for` — Who it’s for
+- `outcomes` — Typical outcomes (array)
+- `examples` — Example engagements (array)
+
+Add or remove sections in both `capabilities.items` and `capabilitiesPage.sections` to stay in sync.
+
+## Form & CRM Integration
+
+The contact form posts to `/api/lead` with:
+
+```json
+{
+  "name": "string",
+  "email": "string",
+  "company": "string (optional)",
+  "challenge": "string"
+}
+```
+
+### Current Behavior
+
+- Validates required fields (`name`, `email`, `primaryConstraint`)
+- Sends an email via Resend (if `RESEND_API_KEY` is set)
+- Logs the lead to the console
+- Returns `{ success: true }` or an error
+
+### Resend (Configured)
+
+Leads are emailed via Resend. Set in `.env.local`:
+
+```bash
+RESEND_API_KEY=re_xxxx           # Required for email delivery
+RESEND_FROM_EMAIL=Ironvael <noreply@ironvael.com>   # Default: onboarding@resend.dev (sandbox)
+RESEND_TO_EMAIL=hello@ironvael.com                  # Where leads are sent (default: hello@ironvael.com)
+```
+
+- **Sandbox:** With `onboarding@resend.dev`, emails only reach the address you signed up with.
+- **Production:** Verify your domain in the Resend dashboard, then set `RESEND_FROM_EMAIL` to your verified address.
+- **Reply-to:** The visitor’s email is set as reply-to, so you can reply directly.
+
+### Wiring to a CRM
+
+Edit `src/app/api/lead/route.ts`. After building the `lead` object, add your integration:
+
+**HubSpot**
+```bash
+npm install @hubspot/api-client
+```
+```ts
+import { Client } from "@hubspot/api-client";
+const hubspot = new Client({ accessToken: process.env.HUBSPOT_ACCESS_TOKEN });
+await hubspot.crm.contacts.basicApi.create({
+  properties: {
+    email: lead.email,
+    firstname: lead.name,
+    company: lead.company ?? "",
+    message: lead.challenge,
+  },
+});
+```
+
+**Notion**
+```bash
+npm install @notionhq/client
+```
+```ts
+import { Client } from "@notionhq/client";
+const notion = new Client({ auth: process.env.NOTION_API_KEY });
+await notion.pages.create({
+  parent: { database_id: process.env.NOTION_LEADS_DB_ID! },
+  properties: {
+    Name: { title: [{ text: { content: lead.name } }] },
+    Email: { email: lead.email },
+    Company: { rich_text: [{ text: { content: lead.company ?? "" } }] },
+    Challenge: { rich_text: [{ text: { content: lead.challenge } }] },
+  },
+});
+```
+
+**Airtable**
+```bash
+npm install airtable
+```
+```ts
+import Airtable from "airtable";
+const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
+  process.env.AIRTABLE_BASE_ID!
+);
+await base("Leads").create([{
+  fields: {
+    Name: lead.name,
+    Email: lead.email,
+    Company: lead.company ?? "",
+    Challenge: lead.challenge,
+  },
+}]);
+```
+
+Add the required env vars to `.env.local` and deploy.
+
+## SEO
+
+- Metadata and OG tags are set in `layout.tsx` and each page’s `metadata` export
+- Sitemap: `/sitemap.xml` (configure `NEXT_PUBLIC_SITE_URL` for production)
+- Robots: `/robots.txt` (allows all, references sitemap)
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── api/lead/         # Form submission handler
+│   ├── capabilities/
+│   ├── engagement/
+│   ├── about/
+│   ├── contact/
+│   ├── layout.tsx
+│   ├── page.tsx          # Home
+│   ├── robots.ts
+│   └── sitemap.ts
+├── components/
+│   ├── home/             # Home page sections
+│   ├── ui/               # shadcn components
+│   ├── ContactForm.tsx
+│   ├── Footer.tsx
+│   └── Header.tsx
+└── lib/
+    ├── copy.ts           # All site copy
+    └── utils.ts
+```
+
+## Design System
+
+- **Colors:** Charcoal, dark steel, black stone (see `globals.css` `:root`)
+- **Typography:** Archivo (headings), DM Sans (body)
+- **Philosophy:** Dominant, timeless, calm, industrial. No bright colors or playful elements.
