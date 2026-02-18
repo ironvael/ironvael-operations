@@ -3,6 +3,7 @@ import { DM_Sans, Archivo } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Analytics } from "@vercel/analytics/next"
 
 const dmSans = DM_Sans({
   variable: "--font-body",
@@ -38,6 +39,7 @@ export default function RootLayout({
       <body
         className={`${dmSans.variable} ${archivo.variable} font-sans antialiased`}
       >
+        <Analytics/>
         <Header />
         {children}
         <Footer />
