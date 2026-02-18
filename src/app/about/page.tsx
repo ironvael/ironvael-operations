@@ -3,20 +3,29 @@ import { Section, SectionContent } from "@/components/Section";
 import { aboutPage } from "@/lib/copy";
 
 export const metadata: Metadata = {
-  title: "About — Ironvael Operations",
+  title: "About",
   description:
     "Ironvael Operations is the operating arm of Ironvael—building systems, infrastructure, and foundations for durability and permanence.",
+  openGraph: {
+    title: "About | Ironvael Operations",
+    description:
+      "Ironvael Operations is the operating arm of Ironvael—building systems, infrastructure, and foundations for durability and permanence.",
+    url: "/about",
+  },
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen pt-32">
+    <main className="min-h-screen pt-24 sm:pt-32">
       <Section>
         <SectionContent className="max-w-3xl">
-          <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+          <h1 className="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
             {aboutPage.headline}
           </h1>
-          <div className="mt-16 space-y-12">
+          <div className="mt-12 space-y-10 sm:mt-16 sm:space-y-12">
             <div>
               <h2 className="font-display text-lg font-semibold text-foreground">
                 Venture Studio

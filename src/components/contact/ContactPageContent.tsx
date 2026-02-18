@@ -60,13 +60,13 @@ export function ContactPageContent() {
   }, [typeParam, router]);
 
   return (
-    <div className="mx-auto max-w-6xl px-6 pt-32 pb-20 lg:px-8">
+    <div className="mx-auto max-w-6xl px-4 pt-24 pb-16 sm:px-6 sm:pt-32 sm:pb-20 lg:px-8">
       {/* Header */}
-      <header className="mb-16">
-        <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+      <header className="mb-12 sm:mb-16">
+        <h1 className="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
           {contactPage.hero.headline}
         </h1>
-        <p className="mt-6 text-lg text-muted-foreground">
+        <p className="mt-4 text-base text-muted-foreground sm:mt-6 sm:text-lg">
           {contactPage.hero.subtext}
         </p>
         <p className="mt-4 text-sm text-muted-foreground/80">
@@ -75,7 +75,7 @@ export function ContactPageContent() {
       </header>
 
       {/* Two-column grid */}
-      <div className="grid gap-10 lg:grid-cols-[280px_1fr]">
+      <div className="grid gap-8 sm:gap-10 lg:grid-cols-[280px_1fr]">
         {/* Left: Routing cards */}
         <aside>
           <h2 className="mb-6 font-display text-sm font-semibold uppercase tracking-wider text-muted-foreground">
@@ -91,7 +91,7 @@ export function ContactPageContent() {
                   type="button"
                   onClick={() => setRoute(card.id)}
                   className={cn(
-                    "flex w-full items-start gap-4 rounded-md border px-4 py-4 text-left transition-colors",
+                    "flex w-full min-h-[56px] items-start gap-4 rounded-md border px-4 py-4 text-left transition-colors active:bg-card/80",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                     isSelected
                       ? "border-primary/50 bg-card/60"
@@ -135,7 +135,7 @@ export function ContactPageContent() {
             transition={{ duration: 0.2, ease: "easeOut" }}
             className="min-w-0"
           >
-          <Card className="rounded-sm border-2 border-border/60 bg-card/30 px-6 py-12 shadow-none sm:px-12 sm:py-14">
+          <Card className="rounded-sm border-2 border-border/60 bg-card/30 px-4 py-8 shadow-none sm:px-8 sm:py-12 lg:px-12 lg:py-14">
             <h2 className="font-display text-xl font-semibold tracking-tight text-foreground">
               {selected === "partnerships"
                 ? ROUTE_TITLES.partnerships
@@ -154,8 +154,8 @@ export function ContactPageContent() {
       </div>
 
       {/* Bottom: What happens next */}
-      <section className="mt-20 border-t border-border/50 pt-16">
-        <h2 className="font-display text-xl font-semibold tracking-tight text-foreground">
+      <section className="mt-16 border-t border-border/50 pt-12 sm:mt-20 sm:pt-16">
+        <h2 className="font-display text-lg font-semibold tracking-tight text-foreground sm:text-xl">
           {contactPage.expectations.headline}
         </h2>
         <ul className="mt-6 space-y-3">

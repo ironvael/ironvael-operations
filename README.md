@@ -205,8 +205,15 @@ Add the required env vars to `.env.local` and deploy.
 
 ## SEO
 
-- Metadata and OG tags are set in `layout.tsx` and each page’s `metadata` export
-- Sitemap: `/sitemap.xml` (configure `NEXT_PUBLIC_SITE_URL` for production)
+- **Config:** `src/lib/seo.ts` (site URL, keywords)
+- **Layout:** metadataBase, Open Graph, Twitter cards, robots, JSON-LD (Organization + WebSite)
+- **Pages:** Unique title, description, canonical URL, Open Graph
+- **Sitemap:** `/sitemap.xml` — set `NEXT_PUBLIC_SITE_URL` for production
+- **Robots:** `/robots.txt`
+- **Favicon:** `public/favicon.ico` — wired in layout
+- **OG image:** `public/og.png` (1200×630) — wired in layout
+- **Verification:** `GOOGLE_SITE_VERIFICATION`, `YANDEX_VERIFICATION` in `.env.local`
+- **Twitter:** `NEXT_PUBLIC_TWITTER_HANDLE` (e.g. `@ironvael`) in `.env.local`
 - Robots: `/robots.txt` (allows all, references sitemap)
 
 ## Project Structure

@@ -3,27 +3,36 @@ import { Section, SectionContent } from "@/components/Section";
 import { capabilitiesPage } from "@/lib/copy";
 
 export const metadata: Metadata = {
-  title: "Capabilities — Ironvael Operations",
+  title: "Capabilities",
   description:
     "Operations consulting, business infrastructure, compliance, web systems, brand positioning, and founder advisory.",
+  openGraph: {
+    title: "Capabilities | Ironvael Operations",
+    description:
+      "Operations consulting, business infrastructure, compliance, web systems, brand positioning, and founder advisory.",
+    url: "/capabilities",
+  },
+  alternates: {
+    canonical: "/capabilities",
+  },
 };
 
 export default function CapabilitiesPage() {
   return (
-    <main className="min-h-screen pt-32">
+    <main className="min-h-screen pt-24 sm:pt-32">
       <Section>
         <SectionContent className="max-w-4xl">
-          <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+          <h1 className="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
             Capabilities
           </h1>
-          <p className="mt-6 text-lg text-muted-foreground">
+          <p className="mt-4 text-base text-muted-foreground sm:mt-6 sm:text-lg">
             {capabilitiesPage.intro}
           </p>
-          <div className="mt-16 space-y-24">
+          <div className="mt-12 space-y-16 sm:mt-16 sm:space-y-24">
             {capabilitiesPage.sections.map((section) => (
               <article
                 key={section.title}
-                className="border-b border-border/50 pb-16 last:border-0 last:pb-0"
+                className="border-b border-border/50 pb-12 last:border-0 last:pb-0 sm:pb-16"
               >
                 <div className="text-xs font-medium tracking-wider text-muted-foreground">
                   Specification

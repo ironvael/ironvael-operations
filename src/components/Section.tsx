@@ -14,7 +14,7 @@ export function Section({
   return (
     <Component
       className={cn(
-        "relative py-24 lg:py-32",
+        "relative py-16 sm:py-24 lg:py-32",
         className
       )}
     >
@@ -33,7 +33,7 @@ export function SectionContent({
   return (
     <div
       className={cn(
-        "mx-auto max-w-7xl px-6 lg:px-8",
+        "mx-auto max-w-7xl px-4 sm:px-6 lg:px-8",
         className
       )}
     >

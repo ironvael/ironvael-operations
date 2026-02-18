@@ -24,7 +24,7 @@ const ROUTE_TITLES: Record<Exclude<ContactRoute, "partnerships">, string> = {
 };
 
 const inputBase =
-  "h-12 w-full rounded-sm border border-border/70 bg-background/50 px-4 text-[15px] transition-[border-color,box-shadow] placeholder:text-muted-foreground/60 focus-visible:border-foreground/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/10 disabled:opacity-50";
+  "h-12 min-h-[44px] w-full rounded-sm border border-border/70 bg-background/50 px-4 text-base transition-[border-color,box-shadow] placeholder:text-muted-foreground/60 focus-visible:border-foreground/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/10 disabled:opacity-50 sm:text-[15px]";
 
 interface InquiryFormProps {
   route: Exclude<ContactRoute, "partnerships">;

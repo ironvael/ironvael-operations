@@ -29,16 +29,16 @@ export function Problem() {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.h2
-            className="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
+            className="font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl lg:text-4xl"
             variants={item}
           >
             {problem.headline}
           </motion.h2>
           <ul className="mt-8 space-y-4">
             {problem.items.map((statement) => (
-              <motion.li
-                key={statement}
-                className="text-lg text-muted-foreground"
+            <motion.li
+              key={statement}
+              className="text-base text-muted-foreground sm:text-lg"
                 variants={item}
               >
                 {statement}
@@ -46,7 +46,7 @@ export function Problem() {
             ))}
           </ul>
           <motion.p
-            className="mt-12 text-xl font-medium text-foreground"
+            className="mt-10 text-lg font-medium text-foreground sm:mt-12 sm:text-xl"
             variants={item}
           >
             {problem.resolution}

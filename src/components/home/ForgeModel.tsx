@@ -22,7 +22,7 @@ export function ForgeModel() {
     <Section>
       <SectionContent>
         <motion.h2
-          className="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl"
+          className="font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl lg:text-4xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -30,11 +30,11 @@ export function ForgeModel() {
         >
           {forgeModel.headline}
         </motion.h2>
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-4 sm:mt-16 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {forgeModel.blocks.map((blockData, i) => (
             <motion.article
               key={blockData.title}
-              className="border border-border/50 bg-card/30 p-6"
+              className="border border-border/50 bg-card/30 p-5 sm:p-6"
               variants={blockVariant}
               initial="hidden"
               whileInView="show"

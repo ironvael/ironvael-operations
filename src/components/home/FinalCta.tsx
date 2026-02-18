@@ -18,17 +18,17 @@ export function FinalCta() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+          <h2 className="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl xl:text-6xl">
             {finalCta.headline}
           </h2>
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <Button asChild size="lg" className="h-12 px-8 text-base">
+          <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
+            <Button asChild size="lg" className="h-12 min-h-[44px] w-full justify-center px-8 text-base sm:w-auto">
               <Link href="/contact">
                 {finalCta.primaryCta}
                 <ArrowRight className="size-4" />
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="h-12 px-8 text-base">
+            <Button asChild variant="outline" size="lg" className="h-12 min-h-[44px] w-full justify-center px-8 text-base sm:w-auto">
               <a href={`mailto:${site.email}`}>{finalCta.secondaryCta}</a>
             </Button>
           </div>

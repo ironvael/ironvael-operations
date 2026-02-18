@@ -3,9 +3,18 @@ import { Suspense } from "react";
 import { ContactPageContent } from "@/components/contact/ContactPageContent";
 
 export const metadata: Metadata = {
-  title: "Contact — Ironvael Operations",
+  title: "Contact",
   description:
     "Contact Ironvael. Choose your path. We respond when there is alignment. Forged in Permanence.",
+  openGraph: {
+    title: "Contact | Ironvael Operations",
+    description:
+      "Contact Ironvael. Choose your path. We respond when there is alignment. Forged in Permanence.",
+    url: "/contact",
+  },
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 function ContactLoading() {

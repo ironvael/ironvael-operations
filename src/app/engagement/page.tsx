@@ -6,27 +6,36 @@ import { Section, SectionContent } from "@/components/Section";
 import { engagementPage } from "@/lib/copy";
 
 export const metadata: Metadata = {
-  title: "Engagement — Ironvael Operations",
+  title: "Engagement",
   description:
     "How we work: Audit, Build, and Operator engagement types. Fixed-scope audits, custom builds, and ongoing partnerships.",
+  openGraph: {
+    title: "Engagement | Ironvael Operations",
+    description:
+      "How we work: Audit, Build, and Operator engagement types. Fixed-scope audits, custom builds, and ongoing partnerships.",
+    url: "/engagement",
+  },
+  alternates: {
+    canonical: "/engagement",
+  },
 };
 
 export default function EngagementPage() {
   return (
-    <main className="min-h-screen pt-32">
+    <main className="min-h-screen pt-24 sm:pt-32">
       <Section>
         <SectionContent className="max-w-4xl">
-          <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+          <h1 className="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
             {engagementPage.headline}
           </h1>
-          <p className="mt-6 text-lg text-muted-foreground">
+          <p className="mt-4 text-base text-muted-foreground sm:mt-6 sm:text-lg">
             {engagementPage.intro}
           </p>
-          <div className="mt-16 space-y-8">
+          <div className="mt-12 space-y-6 sm:mt-16 sm:space-y-8">
             {engagementPage.types.map((type, i) => (
               <article
                 key={type.title}
-                className="border border-border/50 bg-card/20 p-8"
+                className="border border-border/50 bg-card/20 p-6 sm:p-8"
               >
                 <div className="text-xs font-medium tracking-wider text-muted-foreground">
                   0{i + 1}
@@ -41,8 +50,8 @@ export default function EngagementPage() {
               </article>
             ))}
           </div>
-          <div className="mt-16">
-            <Button asChild size="lg" className="h-12 px-8">
+          <div className="mt-12 sm:mt-16">
+            <Button asChild size="lg" className="h-12 min-h-[44px] w-full justify-center px-8 sm:w-auto">
               <Link href="/contact">
                 Request an Engagement
                 <ArrowRight className="size-4" />
